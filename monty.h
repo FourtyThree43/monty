@@ -11,18 +11,18 @@
 #include <fcntl.h>
 
 /**
- * struct global_s - variables -args, file, line content
+ * struct global_s - variables -> args, file, line content
  * @arg: value
- * @line: line content
+ * @line: input line content
  * @file: pointer to monty file
  *
  * Description: variables that carries values through the program
  */
 typedef struct global_s
 {
-    char *arg;
-    FILE *file;
-    char *line;
+	char *arg;
+	FILE *file;
+	char *line;
 } glob_t;
 
 extern glob_t glob;
