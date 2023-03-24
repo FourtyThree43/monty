@@ -14,11 +14,10 @@ void execute_file(stack_t **stack)
 	while ((nread = getline(&glob.line, &len, glob.file)) != -1)
 	{
 		line_number++;
-		opcode = strtok(glob.line, " \t\n");
-
+		opcode = strtok(glob.line, " \t\r\n\a");
+		glob.arg = strtok(NULL, " \n\t");
 		if (opcode == NULL || *opcode == '#')
 			continue;
-
 		execute_opcode(opcode, stack, line_number);
 	}
 }
