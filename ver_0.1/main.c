@@ -1,7 +1,5 @@
 #include "monty.h"
 
-glob_t glob;
-
 /**
  * main - entry point for the monty program
  * @argc: number of command line arguments
@@ -11,7 +9,12 @@ glob_t glob;
  */
 int main(int argc, char *argv[])
 {
+	FILE *file;
+	char *line = NULL;
+	size_t len = 0;
+	ssize_t nread;
 	stack_t *stack = NULL;
+	unsigned int line_number = 0;
 
 	if (argc != 2)
 	{
@@ -19,15 +22,22 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 
-	glob.file = fopen(argv[1], "r");
-	if (glob.file == NULL)
+	file = fopen(argv[1], "r");
+	if (file == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
-
-	execute_file(&stack);
-	fclose(glob.file);
-	free(glob.line);
+	nread = getline(&line, &len, file);
+	while (nread != -1)
+	{
+		line_number++;
+		if (*line == '\n')
+			continue;
+		execute_opcode(line, &stack, line_number);
+	}
+	free(line);
+	fclose(file);
+	free_stack(stack);
 	exit(EXIT_SUCCESS);
 }
