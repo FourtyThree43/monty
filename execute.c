@@ -20,10 +20,6 @@ void execute_file(stack_t **stack)
 			continue;
 		execute_opcode(opcode, stack, line_number);
 	}
-	free_stack(*stack);
-	fclose(glob.file);
-	free(glob.line);
-	exit(EXIT_FAILURE);
 }
 
 /**
