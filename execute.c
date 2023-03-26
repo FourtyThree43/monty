@@ -38,10 +38,10 @@ void execute_opcode(char *opcode, stack_t **stack, unsigned int line_number)
 		{"swap", op_swap},
 		{"nop", op_nop},
 		{"add", op_add},
-		{"nop", op_sub},
-		{"nop", op_div},
-		{"nop", op_mul},
-		{"nop", op_mod},
+		{"sub", op_sub},
+		{"div", op_div},
+		{"mul", op_mul},
+		{"mod", op_mod},
 		{NULL, NULL}
 	};
 	int i;
