@@ -7,6 +7,8 @@
  **/
 void op_add(stack_t **stack, unsigned int line_number)
 {
+	int a, b;
+
 	if (*stack == NULL || (*stack)->next == NULL)
 	{
 		fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
@@ -14,7 +16,8 @@ void op_add(stack_t **stack, unsigned int line_number)
 		free_stack(*stack);
 		exit(EXIT_FAILURE);
 	}
-
-	(*stack)->next->n += (*stack)->n;
+	a = (*stack)->n;
+	b = (*stack)->next->n;
+	b += a;
 	op_pop(stack, line_number);
 }
