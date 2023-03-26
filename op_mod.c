@@ -25,6 +25,6 @@ void op_mod(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	b %= a;
+	(*stack)->next->n = a % b;
 	op_pop(stack, line_number);
 }

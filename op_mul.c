@@ -7,7 +7,7 @@
  */
 void op_mul(stack_t **stack, unsigned int line_number)
 {
-	int a, b;
+	int result;
 	stack_t *temp;
 
 	if (*stack == NULL || (*stack)->next == NULL)
@@ -17,11 +17,8 @@ void op_mul(stack_t **stack, unsigned int line_number)
 	}
 
 	temp = *stack;
-
-	a = temp->n;
-	b = temp->next->n;
-	b *= a;
-
+	result = temp->next->n * temp->n;
+	temp->next->n = result;
 	*stack = temp->next;
 	free(temp);
 }

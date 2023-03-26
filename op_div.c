@@ -7,7 +7,7 @@
  */
 void op_div(stack_t **stack, unsigned int line_number)
 {
-	int a, b;
+	int result;
 	stack_t *temp;
 
 	if (*stack == NULL || (*stack)->next == NULL)
@@ -22,10 +22,8 @@ void op_div(stack_t **stack, unsigned int line_number)
 		fprintf(stderr, "L%d: division by zero\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-	a = temp->n;
-	b = temp->next->n;
-	b /= a;
-
+	result = temp->next->n / temp->n;
+	temp->next->n = result;
 	*stack = temp->next;
 	free(temp);
 }
